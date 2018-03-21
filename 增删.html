@@ -1,0 +1,319 @@
+<html>
+
+	<head>
+		<title>jQuery 动态增删表格</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Language" content="zh-CN" />
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var addToTrTop = 10;
+				var addToTrLeft = 534;
+				var addToTdLeft = 60; //若设置addToTdLeft则addToTrLeft失效 
+				var preEdit = null;
+				var inputData = '<input id="tmpEditor" type="text" value="?"></input>';
+				var bindListening = function() {
+					//表格点击响应 
+					$("td").unbind().click(function() {
+						if($(this).hasClass('search')) return false;
+						var tdData = $("#tmpEditor").val();
+						if(!$(this).parent().hasClass('editting')) {
+							preEdit && preEdit.empty().html(tdData.trim(' '));
+							preEdit = null;
+							$("#tmpEditor").parent().empty().html($("#tmpEditor").val());
+							$(".editting").removeClass('editting');
+						} else if(preEdit && (preEdit.parent().children().index($(preEdit)) != $(this).parent().children().index($(this)))) {
+							preEdit.empty().html(tdData.trim(' '));
+							preEdit = null;
+						} else {
+							if(!$("#tmpEditor").val()) {
+								preEdit = $(this);
+								var tdData = $(this).html();
+								$(this).empty().append(inputData.replace('?', tdData));
+								$("#tmpEditor").focus();
+							}
+						}
+						if(!$(this).parent().hasClass('editting')) {
+							if(!addToTdLeft) {
+								var offsetLeft = (parseInt($(this).parent().offset().left) + addToTrLeft);
+							} else {
+								var offsetLeft = (parseInt($(this).offset().left) + addToTdLeft);
+							}
+							var tipStyle = 'top:' + (parseInt($(this).offset().top) + addToTrTop) + 'px;left:' + offsetLeft + 'px;';
+							$("#clickTips").attr('style', tipStyle).show();
+						}
+						bindListening();
+					});
+					//向上增加一行 
+					$("#addUp").unbind().click(function() {
+						doAddTrData($(this), 'up');
+						bindListening();
+					});
+					//向下增加一行 
+					$("#addDown").unbind().click(function() {
+						doAddTrData($(this), 'down');
+						bindListening();
+					});
+					//删除当前行 
+					$("#delete").unbind().click(function() {
+						doDeleteTrData($(this), 'delete');
+						bindListening();
+					});
+					//编辑当前行 
+					$("#edit").unbind().click(function() {
+						doEditTrData($(this), 'edit');
+						bindListening();
+					});
+					//查询操作 
+					$("#searchButton").click(function() {
+						$("#clickTips").hide();
+						var trs = $("#tableContainer").find("tr");
+						var tdLength = trs.eq(0).children('td').length;
+						var RegExp = '';
+						for(var i = 0; i < tdLength; i++) {
+							RegExp += '[^,]*' + trs.eq(1).find('input').eq(i).val() + '[^,]*,';
+						}
+						//不加eval则正则匹配失效 
+						RegExp = eval('/' + RegExp.substr(0, RegExp.length - 1) + '/i');
+						var stringObject = [];
+						for(var i = 2; i < trs.length; i++) {
+							stringObject[i] = '';
+							for(var j = 0; j < tdLength; j++) {
+								stringObject[i] += trs.eq(i).find('td').eq(j).html() + ',';
+							}
+							stringObject[i] = stringObject[i].substr(0, stringObject[i].length - 1).toString();
+						}
+						for(var i = 2; i < trs.length; i++) {
+							if(stringObject[i].search(RegExp)) {
+								trs.eq(i).hide();
+							} else {
+								trs.eq(i).show();
+							}
+						}
+						bindListening();
+					});
+					var addTrData = $("tr:first").clone(true).attr('class', 'newAdd');
+					var getIndex = function(clickedTd, type) {
+						var fields = $("tr");
+						var addIndex = -1;
+						for(var i = 1; i < fields.length; i++) {
+							var tipStyle = clickedTd.parent().attr('style');
+							var topValue = 'top: ' + (parseInt(fields.eq(i).offset().top) + addToTrTop);
+							var ie_topValue = 'top: ' + (parseInt(fields.eq(i).offset().top) + (addToTrTop - 2));
+							if((tipStyle.indexOf(topValue) != -1) || (tipStyle.indexOf(ie_topValue) != -1)) {
+								switch(type.toLowerCase()) {
+									case 'up':
+										addIndex = i - 1;
+										break;
+									case 'down':
+									case 'edit':
+									case 'delete':
+										addIndex = i;
+										break;
+								}
+							}
+						}
+						return addIndex;
+					}
+					$("#clearSearchButton").click(function() {
+						$("#clickTips").hide();
+						$(".search input[type=text]").val('');
+						$("tr").show();
+						$("tr.cloneTr").hide();
+					})
+					var doAddTrData = function(clickedTd, type) {
+						if(getIndex(clickedTd, type) == -1) return false;
+						else {
+							var index = getIndex(clickedTd, type);
+						}
+						$("table tr").eq(index).after(addTrData);
+						setTimeout('$(".newAdd").attr("class",null)', 1000);
+						$("#clickTips").hide();
+						return false;
+					}
+					var doDeleteTrData = function(clickedTd, type) {
+						if(getIndex(clickedTd, type) == -1) return false;
+						else {
+							var index = getIndex(clickedTd, type);
+						}
+						$("table tr").eq(index).remove();
+						$("#clickTips").hide();
+						return false;
+					}
+					var doEditTrData = function(clickedTd, type) {
+						if(getIndex(clickedTd, type) == -1) return false;
+						else {
+							var index = getIndex(clickedTd, type);
+						}
+						$("table tr").eq(index).addClass('editting');
+						$("#clickTips").hide();
+						return false;
+					}
+				}
+				bindListening();
+			});
+		</script>
+		<style type="text/css">
+			table {
+				margin: 0 auto;
+			}
+			
+			td,
+			#tmpEditor {
+				display: block;
+				float: left;
+				border: 1px solid #000000;
+				margin: auto 0.5px;
+				width: 60px;
+				height: 20px;
+			}
+			
+			#clickTips {
+				border: 1px solid #000000;
+				position: absolute;
+				left: 3px;
+				width: 120px;
+				padding: 3px;
+				display: none;
+				background-color: #F5FFFA;
+				z-index: 3;
+			}
+			
+			span {
+				float: left;
+				width: 100px;
+				height: 20px;
+				clear: both;
+			}
+			
+			.cloneTr {
+				display: none;
+			}
+			
+			.newAdd td {
+				background-color: #FFFACD;
+			}
+			
+			.editting td {
+				background-color: #F0F0F0;
+			}
+			
+			.search {
+				background-color: #dddccc;
+			}
+			
+			.search input {
+				padding-bottom: 0;
+				padding-right: 7px;
+			}
+			
+			.searchButtonTd {
+				float: left;
+			}
+			
+			#searchButton,
+			#clearSearchButton {
+				margin-left: -2px;
+				margin-top: -2px;
+				padding-bottom: 0;
+				padding-right: 20px;
+			}
+		</style>
+		<div id="tableContainer">
+			<table>
+				<tr class="cloneTr">
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<td class="search"><input type="text" size="6" /></td>
+					<td class="search"><input type="text" size="6" /></td>
+					<td class="search"><input type="text" size="6" /></td>
+					<td class="search"><input type="text" size="6" /></td>
+					<td class="search"><input type="text" size="6" /></td>
+					<td class="search"><input type="text" size="6" /></td>
+					<td class="search"><input type="text" size="6" /></td>
+					<td class="search"><input type="text" size="6" /></td>
+					<td class="search searchButtonTd"><input id="searchButton" type="button" size="10" value="查询" /></td>
+					<td class="search searchButtonTd"><input id="clearSearchButton" type="button" size="10" value="清除" /></td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+				</tr>
+				<tr>
+					<td>a</td>
+					<td>b</td>
+					<td>c</td>
+					<td>d</td>
+					<td>e</td>
+					<td>f</td>
+					<td>g</td>
+					<td>h</td>
+				</tr>
+				<tr>
+					<td>A</td>
+					<td>B</td>
+					<td>C</td>
+					<td>D</td>
+					<td>E</td>
+					<td>F</td>
+					<td>G</td>
+					<td>H</td>
+				</tr>
+				<tr>
+					<td>aa</td>
+					<td>bb</td>
+					<td>cc</td>
+					<td>dd</td>
+					<td>ee</td>
+					<td>ff</td>
+					<td>gg</td>
+					<td>hh</td>
+				</tr>
+				<tr>
+					<td>111</td>
+					<td>222</td>
+					<td>333</td>
+					<td>444</td>
+					<td>555</td>
+					<td>666</td>
+					<td>777</td>
+					<td>888</td>
+				</tr>
+				<tr>
+					<td>1a</td>
+					<td>2b</td>
+					<td>3c</td>
+					<td>4d</td>
+					<td>5e</td>
+					<td>6f</td>
+					<td>7g</td>
+					<td>8h</td>
+				</tr>
+			</table>
+		</div>
+		<div id="clickTips">
+			<span id="addUp">向上增加一行</span>
+			<span id="edit">修改当前一行</span>
+			<span id="addDown">向下增加一行</span>
+			<span id="delete">删除当前行</span>
+		</div>
+	</body>
+
+</html>
