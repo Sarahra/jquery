@@ -4,29 +4,36 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title></title>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 		<link href="css/haiersoft.css" rel="stylesheet" type="text/css" media="screen,print" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
-		<script src="js/jquery-1.10.1.min.js"></script>
 		<style type="text/css">
-			.Popover{
-				position: absolute;
-				top: 0;
-				width: 100%;
-				height: 100%;
-				background: #333;
-				opacity: 0.5;
-				/*display: none;*/
+			.modal-body{
+				margin-left: 20px;
+			}
+			.label_left{
+				    float: left;
+				    width: 160px;
+				    padding-top: 5px;
+				    text-align: right;
+				    font-size: 17px;
+			}
+			.label_right{
+				width: 200px;
+			    margin-left: 15px;
+			    margin-top: 4px;
+				float: left;
+			}
+			.modal-footer{
+				clear: both;
 			}
 			.box{
-				width: 400px;
-				height: 300px;
-				border: 1px solid;
-				margin: 0 auto;
-				color: #fff;
-				margin-top: 150px;
-				padding: 20px;
+				width: 100%;
+				height:50px;
+			}
+			.add{
+				float: right;
+			    margin-right: 58px;
+    			margin-top: 4px;
 			}
 		</style>
 	</head>
@@ -45,11 +52,11 @@
 						<th>是否借出</th>
 						<th>借阅次数</th>
 						<th>定价</th>
-						<th>删除</th>
+						<th>操作</th>
 					</tr>
 					<tr>
 						<td>1</td>
-						<td>弟子规</td>
+						<td >弟子规</td>
 						<td>湖北美术出版社</td>
 						<td>张三</td>
 						<td>幼儿</td>
@@ -57,8 +64,8 @@
 						<td>3</td>
 						<td>35.00</td>
 						<td>
-							<a class="edit" href="#">编辑</a> |
-							<a class="dlt" href="#">删除</a>
+							<a class="edit" data-toggle="modal" data-target="#myModal">编辑</a> |
+							<a class="dlt">删除</a>
 						</td>
 					</tr>
 					<tr>
@@ -71,7 +78,7 @@
 						<td>3</td>
 						<td>55.00</td>
 						<td>
-							<a class="edit" href="#">编辑</a> |
+							<a class="edit" data-toggle="modal" data-target="#myModal" href="#">编辑</a> |
 							<a class="dlt" href="#">删除</a>
 						</td>
 					</tr>
@@ -85,7 +92,7 @@
 						<td>3</td>
 						<td>45.00</td>
 						<td>
-							<a class="edit" href="#">编辑</a> |
+							<a class="edit" href="#" data-toggle="modal" data-target="#myModal">编辑</a> |
 							<a class="dlt" href="#">删除</a>
 						</td>
 					</tr>
@@ -99,56 +106,165 @@
 						<td>8</td>
 						<td>65.00</td>
 						<td>
-							<a class="edit" href="#">编辑</a> |
+							<a href="#" class="edit" data-toggle="modal" data-target="#myModal">编辑</a> |
 							<a class="dlt" href="#">删除</a>
 						</td>
 					</tr>
 					
 				</table>
+				<button class="btn btn-primary add">添加</button>
 				<p class="msg">共找到47条年度预算记录，当前显示从第1条至第10条</p>
 			</div>
 		</div>
 		<!-- /MainForm -->
 		<!--弹出层-->
-		<div class="Popover">
-			<div class="box">
-				<div class="list-group">
-				    <a href="#" class="list-group-item active">
-				        <h4 class="list-group-item-heading">
-				            编辑
-				        </h4>
-				    </a>
-				    <a href="#" class="list-group-item">
-				        <h4 class="list-group-item-heading">
-				            免费域名注册
-				        </h4>
-				        <p class="list-group-item-text">
-				            您将通过网页进行免费域名注册。
-				        </p>
-				    </a>
-				    <a href="#" class="list-group-item">
-				        <h4 class="list-group-item-heading">24*7 支持</h4>
-				        <p class="list-group-item-text">我们提供 24*7 支持。</p>
-				    </a>
-				</div>
-                 <div class="control-group text-center">
-	                <button class="btn blue confirm-area" type="submit"><i class="icon-ok"></i>确定</button>
-	                <button class="btn blue" type="button" id="add-cancel">取消</button>
-	            </div>
-				
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					编辑
+				</h4>
 			</div>
-			
-		</div>
-		
-		<script src="js/jquery-1.10.1.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/bootstrap.js" charset="utf-8"></script>
+			<div class="modal-body">
+				<div class="box">
+					<div class="label_left">
+						书名:
+					</div>
+					<div class="label_right">
+						<input type="text" />
+					</div>
+				</div>
+				<div class="box">
+					<div class="label_left">
+						出版社:
+					</div>
+					<div class="label_right">
+						<input type="text"   />
+					</div>
+				</div>
+				<div class="box">
+					<div class="label_left">
+						作者:
+					</div>
+					<div class="label_right">
+						<input type="text"  />
+					</div>
+				</div>
+				<div class="box">
+					<div class="label_left">
+						类型:
+					</div>
+					<div class="label_right">
+						<input type="text" />
+					</div>
+				</div>
+				<div class="box">
+					<div class="label_left">
+						是否借出:
+					</div>
+					<div class="label_right">
+						<input type="text"  />
+					</div>
+				</div>
+				<div class="box">
+					<div class="label_left">
+						借阅次数:
+					</div>
+					<div class="label_right">
+						<input type="text"   />
+					</div>
+				</div>
+				<div class="box">
+					<div class="label_left">
+						价格:
+					</div>
+					<div class="label_right">
+						<input type="text" />
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary sub">
+					确认
+				</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+	</div>	
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			$(function(){
-				$('.edit').click(function(){
-					$('.Popover').show();
-					
+			window.onload = function () {
+				var ipt = $(':input');
+				for (var i=0;i<ipt.length-1;i++) {
+					var index = $(this).index();
+					var va = $(".edit").parent().siblings()[i].innerHTML;
+					console.log(va);
+					$(ipt[i+1]).val(va);
+				}
+				
+				
+				$(".add").click(function(){
+				var trHtml = '<tr><td>5</td><td>水浒传</td><td>北京文化出版社</td><td>陆涛</td><td>文学</td><td>否</td><td>5</td><td>100.00</td><td><a class="edit" data-toggle="modal" data-target="#myModal">编辑</a>|<a class="dlt">删除</a></td></tr>';
+					$('table').append(trHtml);
 				})
-			})
+				$(".dlt").click(function(){
+					$(this).parent().parent().remove();
+				})
+				
+			
+			}
+			
+			
+			
+			
+//			function DataBinder(object_id){  
+//		        var pubSub = jQuery({});  
+//		        var data_attr = "bind-"+object_id,  
+//		            message = object_id+":change";  
+//		        jQuery(document).on("change","[data-" + data_attr +"]",function(evt){  
+//		            var $input = jQuery(this);  
+//		            pubSub.trigger(message, [$input.attr("data-" + data_attr), $input.val()]);  
+//		        });  
+//		        pubSub.on(message, function(evt,prop_name,new_val){  
+//		            jQuery("[data-" + data_attr + "=" + prop_name + "]").each(function(){  
+//		                var $bound = jQuery(this);  
+//		                if($bound.is("input,textarea,select")) {  
+//		                    $bound.val(new_val);  
+//		                }  
+//		                else{  
+//		                    $bound.html(new_val);  
+//		                }  
+//		            });  
+//		        });  
+//		        return pubSub;  
+//		    }  
+//
+//  function User(uid){  
+//      var binder = new DataBinder(uid),  
+//          user = {  
+//              attributes: {},  
+//              set: function(attr_name,val){  
+//                  this.attributes[attr_name] = val;  
+//                  binder.trigger(uid + ":change", [attr_name, val, this]);  
+//              },  
+//
+//              get: function(attr_name){  
+//                  return this.attributes[attr_name];  
+//              },  
+//              _binder: binder  
+//          };  
+//       
+//        return user;  
+//  	}  
+//		var user = new User(0);  
+// 		user.set("name","text");  
 		</script>
 		
 	</body>
