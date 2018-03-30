@@ -1,0 +1,22 @@
+$(function() {
+	$('body').on('click','[data-del]',function(){
+		var url = $(this).attr('data-action');
+		$.get(url,function(ret){
+			if (ret.code == 1) {
+				alert(ret.msg);
+				window.history.go(0);
+			}else{
+				alert(ret.msg);
+			}
+		});
+	}).on('click','.edit',function(){
+		var url = $(this).attr('data-action');
+		$.ajax({
+			url:url,
+			type:'get',
+			success:function(ret){
+				console.log(ret)
+			}
+		})
+	})
+})

@@ -89,7 +89,7 @@ body{
 					<td>{$vo.b_times}</td>
 					<td>{$vo.price}</td>
 					<td>
-						<a class="edit" data-toggle="modal"  href="javascript:;" data-action="{:url('admin/book/edit')}?id={$vo.id}" data-target="#myModal">编辑</a> |
+						<a class="edit" data-toggle="modal" data-target="#myModal">编辑</a> |
 						<a href="javascript:;" data-del data-action="{:url('admin/book/del')}?id={$vo.id}" class="dlt">删除</a>
 					</td>
 				</tr>
@@ -119,7 +119,7 @@ body{
 							书名:
 						</div>
 						<div class="label_right">
-							<input data-value name="title" type="text" />
+							<input type="text" />
 						</div>
 					</div>
 					<div class="box">
@@ -127,7 +127,7 @@ body{
 							出版社:
 						</div>
 						<div class="label_right">
-							<input data-value name="press" type="text"   />
+							<input type="text"   />
 						</div>
 					</div>
 					<div class="box">
@@ -135,7 +135,7 @@ body{
 							作者:
 						</div>
 						<div class="label_right">
-							<input data-value name="author" type="text"  />
+							<input type="text"  />
 						</div>
 					</div>
 					<div class="box">
@@ -143,7 +143,7 @@ body{
 							类型:
 						</div>
 						<div class="label_right">
-							<select data-value name="type"> 
+							<select name=""> 
 								<option value="文学">文学</option>
 								<option value="小说">小说</option>
 								<option value="儿童">儿童</option>
@@ -157,7 +157,7 @@ body{
 							是否借出:
 						</div>
 						<div class="label_right">
-							<input data-value name="lend" type="number"  />
+							<input type="number"  />
 						</div>
 					</div>
 					<div class="box">
@@ -165,7 +165,7 @@ body{
 							借阅次数:
 						</div>
 						<div class="label_right">
-							<input data-value name="b_times" type="number"   />
+							<input type="number"   />
 						</div>
 					</div>
 					<div class="box">
@@ -173,12 +173,12 @@ body{
 							价格:
 						</div>
 						<div class="label_right">
-							<input data-value name="price" type="number" />
+							<input type="number" />
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary sub edit-btn" data-id data-action="{:url('admin/book/form')}">
+					<button type="button" class="btn btn-primary sub">
 						确认
 					</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭

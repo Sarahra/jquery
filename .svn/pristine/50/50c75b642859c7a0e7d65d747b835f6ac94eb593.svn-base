@@ -1,0 +1,13 @@
+$(function() {
+	$('body').on('click','[data-del]',function(){
+		var url = $(this).attr('data-action');
+		$.get(url,function(ret){
+			if (ret.code == 1) {
+				alert(ret.msg);
+				window.history.go(0);
+			}else{
+				alert(ret.msg);
+			}
+		});
+	})
+})

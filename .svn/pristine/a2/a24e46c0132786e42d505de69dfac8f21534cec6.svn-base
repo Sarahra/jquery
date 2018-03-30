@@ -1,0 +1,53 @@
+$(function() {
+	$('body').on('click','[data-del]',function(){
+		var url = $(this).attr('data-action');
+		$.get(url,function(ret){
+			if (ret.code == 1) {
+				alert(ret.msg);
+				window.history.go(0);
+			}else{
+				alert(ret.msg);
+			}
+		});
+	}).on('click','.edit',function(){
+		var url = $(this).attr('data-action');
+		$.ajax({
+			url:url,
+			type:'get',
+			success:function(ret){
+				if (ret.code == 1) {
+					$('input[name="title"]').val(ret.data.title);
+					$('input[name="author"]').val(ret.data.author);
+					$('input[name="b_times"]').val(ret.data.b_times);
+					$('input[name="press"]').val(ret.data.press);
+					$('input[name="price"]').val(ret.data.price);
+					$('input[name="lend"]').val(ret.data.lend);
+					$('.edit-btn').attr('data-id',ret.data.id);
+				}
+			}
+		})
+	}).on('click','.edit-btn',function(){
+		var url = $(this).attr('data-action');
+        var id = $(this).attr('data-id');
+        var data = {};
+        data['id']=id;
+        $('[data-value]').each(function(){
+            var name = $(this).attr('name');
+            var value = $(this).val();
+            data[$(this).attr('name')]=value;
+        })
+        console.log(data)
+        $.ajax({
+            url: url,
+            type:'post',
+            datatype:'json',
+            data:data,
+            success:function(ret){
+                if (ret.code == 1) {
+                        window.history.go(0)
+                }
+
+            }
+        });
+	})
+})

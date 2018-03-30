@@ -37,7 +37,7 @@ class Book extends basicAdmin
 
     public function del($id = 0)
     {
-        $res = Db::table('book')->where('id',$id)->delete();
+        $res = Db::table('book')->where('id',$id)->deleted();
         $res && $this->success('删除成功！');
         $this->error('删除失败！');
     }
