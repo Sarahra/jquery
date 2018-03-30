@@ -1,0 +1,245 @@
+{extend name="extra@admin/main" /}
+{block name="style"}
+<link href="__STATIC__/admin/css/haiersoft.css" rel="stylesheet" type="text/css" media="screen,print" />
+<!-- <link rel="stylesheet" type="text/css" href="__STATIC__/admin/css/bootstrap.css"/> -->
+<style type="text/css">
+body{
+			margin: 0;
+			padding: 0;
+		}
+		.contain{
+			margin: 0;
+			padding: 0;
+			/*background-image: url(__STATIC__/admin/img/logBanner.png);*/
+			background-position: center;
+			background-size: 100% 700px;
+			height: 600px;
+			margin-left: 220px;
+		}
+		/*.contain h1{
+			    font-size: 54px;
+			    color: #000000;
+			    position: absolute;
+			    text-align: center;
+			    top: 200px;
+			    left: 33%;
+		}*/
+	.modal-body{
+				margin-left: 20px;
+			}
+			.label_left{
+				    float: left;
+				    width: 160px;
+				    padding-top: 5px;
+				    text-align: right;
+				    font-size: 17px;
+			}
+			.label_right{
+				width: 200px;
+			    margin-left: 15px;
+			    margin-top: 4px;
+				float: left;
+			}
+			.modal-footer{
+				clear: both;
+			}
+			.box{
+				width: 100%;
+				height:50px;
+			}
+			.add{
+				float: right;
+			    margin-right: 58px;
+    			margin-top: 4px;
+			}
+</style>
+{/block}
+{block name="body"}
+	<div id="MainForm">
+		<div class="form_boxA">
+			<h2>年度预算列表</h2>
+			<table cellpadding="0" cellspacing="0">
+				{if condition="!empty($list)"}
+				{foreach $list as $vo}
+				<tr>
+					<th>图书ID</th>
+					<th>书名</th>
+					<th>出版社</th>
+					<th>作者</th>
+					<th>类型</th>
+					<th>是否借出</th>
+					<th>借阅次数</th>
+					<th>定价</th>
+					<th>操作</th>
+				</tr>
+				<tr>
+					<td>{$vo.id}</td>
+					<td >{$vo.title}</td>
+					<td>{$vo.press}</td>
+					<td>{$vo.author}</td>
+					<td>{$vo.type}</td>
+					<td>{$vo.lend}</td>
+					<td>{$vo.b_times}</td>
+					<td>{$vo.price}</td>
+					<td>
+						<a class="edit" data-toggle="modal" data-target="#myModal">编辑</a> |
+						<a class="dlt">删除</a>
+					</td>
+				</tr>
+				{/foreach}
+				{/if}
+			<!-- 	<tr>
+					<td>2</td>
+					<td>活着</td>
+					<td>作家出版社</td>
+					<td>余华</td>
+					<td>文学</td>
+					<td>是</td>
+					<td>3</td>
+					<td>55.00</td>
+					<td>
+						<a class="edit" data-toggle="modal" data-target="#myModal" href="#">编辑</a> |
+						<a class="dlt" href="#">删除</a>
+					</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>自卑与超越</td>
+					<td>民主与建设出版社</td>
+					<td>（奥）阿德勒</td>
+					<td>心理学</td>
+					<td>否</td>
+					<td>3</td>
+					<td>45.00</td>
+					<td>
+						<a class="edit" href="#" data-toggle="modal" data-target="#myModal">编辑</a> |
+						<a class="dlt" href="#">删除</a>
+					</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>阿衰爆笑校园</td>
+					<td>新世纪出版社</td>
+					<td>朱斌</td>
+					<td>漫画</td>
+					<td>否</td>
+					<td>8</td>
+					<td>65.00</td>
+					<td>
+						<a href="#" class="edit" data-toggle="modal" data-target="#myModal">编辑</a> |
+						<a class="dlt" href="#">删除</a>
+					</td>
+				</tr>
+				 -->
+			</table>
+			<button class="btn btn-primary add">添加</button>
+			<p class="msg">共找到47条年度预算记录，当前显示从第1条至第10条</p>
+		</div>
+	</div>
+	<!-- /MainForm -->
+	<!--弹出层-->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+				&times;
+			</button>
+			<h4 class="modal-title" id="myModalLabel">
+				编辑
+			</h4>
+		</div>
+		<div class="modal-body">
+			<div class="box">
+				<div class="label_left">
+					书名:
+				</div>
+				<div class="label_right">
+					<input type="text" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="label_left">
+					出版社:
+				</div>
+				<div class="label_right">
+					<input type="text"   />
+				</div>
+			</div>
+			<div class="box">
+				<div class="label_left">
+					作者:
+				</div>
+				<div class="label_right">
+					<input type="text"  />
+				</div>
+			</div>
+			<div class="box">
+				<div class="label_left">
+					类型:
+				</div>
+				<div class="label_right">
+					<input type="text" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="label_left">
+					是否借出:
+				</div>
+				<div class="label_right">
+					<input type="text"  />
+				</div>
+			</div>
+			<div class="box">
+				<div class="label_left">
+					借阅次数:
+				</div>
+				<div class="label_right">
+					<input type="text"   />
+				</div>
+			</div>
+			<div class="box">
+				<div class="label_left">
+					价格:
+				</div>
+				<div class="label_right">
+					<input type="text" />
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary sub">
+				确认
+			</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+			</button>
+		</div>
+	</div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>	
+	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		window.onload = function () {
+			var ipt = $(':input');
+			for (var i=0;i<ipt.length-1;i++) {
+				var index = $(this).index();
+				var va = $(".edit").parent().siblings()[i].innerHTML;
+				console.log(va);
+				$(ipt[i+1]).val(va);
+			}
+			
+			
+			$(".add").click(function(){
+			var trHtml = '<tr><td>5</td><td>水浒传</td><td>北京文化出版社</td><td>陆涛</td><td>文学</td><td>否</td><td>5</td><td>100.00</td><td><a class="edit" data-toggle="modal" data-target="#myModal">编辑</a>|<a class="dlt">删除</a></td></tr>';
+				$('table').append(trHtml);
+			})
+			$(".dlt").click(function(){
+				$(this).parent().parent().remove();
+			})
+			
+		
+		}
+
+	</script>
+{/block}

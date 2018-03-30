@@ -1,0 +1,3 @@
+﻿{extend name="extra@admin/main" /}
+{block name="body"}
+{/block}

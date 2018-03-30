@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		body{
+			margin: 0;
+			padding: 0;
+		}
+		.contain{
+			margin: 0;
+			padding: 0;
+			background-image: url(img/logBanner.png);
+			background-position: center;
+			background-size: 100% 700px;
+			height: 600px;
+		}
+		.contain h1{
+			    font-size: 54px;
+			    color: #000000;
+			    position: absolute;
+			    text-align: center;
+			    top: 200px;
+			    left: 33%;
+		}
+	</style>
+	<body>
+		<div class="contain">
+			<h1>图书管理系统</h1>
+		</div>
+	</body>
+
+</html>

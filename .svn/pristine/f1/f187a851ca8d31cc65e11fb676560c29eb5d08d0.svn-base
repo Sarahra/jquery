@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="__STATIC__/admin/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="__STATIC__/admin/css/page.css" />
+		<!-- <link href="__STATIC__/admin/css/haiersoft.css" rel="stylesheet" type="text/css" media="screen,print" /> -->
+		<!-- <link rel="stylesheet" type="text/css" href="__STATIC__/admin/css/bootstrap.css"/> -->
+		<link href="__STATIC__/admin/css/haiersoft.css" rel="stylesheet" type="text/css" media="screen,print" />
+		<link href="__STATIC__/admin/css/print.css" rel="stylesheet" type="text/css" media="print" />
+		<script type="text/javascript" src="__STATIC__/admin/js/jquery.min.js"></script>
+		<script src="__STATIC__/admin/js/side.js" type="text/javascript"></script>
+		<script type="text/javascript" src="__STATIC__/admin/js/public.js"></script>
+	</head>
+	{block name="style"}
+	<style type="text/css">
+		body{
+			margin: 0;
+			padding: 0;
+		}
+		.contain{
+			margin: 0;
+			padding: 0;
+			/*background-image: url(__STATIC__/admin/img/logBanner.png);*/
+			background-position: center;
+			background-size: 100% 700px;
+			height: 600px;
+			margin-left: 220px;
+		}
+		/*.contain h1{
+			    font-size: 54px;
+			    color: #000000;
+			    position: absolute;
+			    text-align: center;
+			    top: 200px;
+			    left: 33%;
+		}*/
+	</style>
+	{/block}
+	<body>
+		{block name="head"}
+		<div class="head">
+			<div class="headL">
+				<img class="headLogo" src="__STATIC__/admin/img/logo.png"/>
+			</div>
+			<div class="headR">
+				<span style="color:#FFF">欢迎：admin</span> <a href="head2.html" rel="external">【退出】</a>
+			</div>
+		</div>
+		{/block}
+		{block name="left"}
+		<div class="container">
+			<div class="leftsidebar_box">
+				<a href="{:url('admin/index/index')}"><div class="line">
+						<img src="__STATIC__/admin/img/coin01.png" />&nbsp;&nbsp;首页
+					</div></a>
+				<dl class="system_log">
+					<dt>
+						<img class="icon1" src="__STATIC__/admin/img/coin03.png" /><img class="icon2"
+							src="__STATIC__/admin/img/coin04.png" /> 网站管理<img class="icon3"
+							src="__STATIC__/admin/img/coin19.png" /><img class="icon4"
+							src="__STATIC__/admin/img/coin20.png" />
+					</dt>
+					<dd>
+						<img class="coin11" src="__STATIC__/admin/img/coin111.png" /><img class="coin22"
+							src="__STATIC__/admin/img/coin222.png" /><a class="cks" href="{:url('admin/manager/book')}">图书管理</a><img class="icon5" src="__STATIC__/admin/img/coin21.png" />
+					</dd>
+					<dd>
+						<img class="coin11" src="__STATIC__/admin/img/coin111.png" /><img class="coin22"
+							src="__STATIC__/admin/img/coin222.png" /><a class="cks" href="{:url('admin/user/index')}">读者管理</a><img class="icon5" src="__STATIC__/admin/img/coin21.png" />
+					</dd>
+				</dl>
+				<dl class="system_log">
+					<dt>
+						<img class="icon1" src="__STATIC__/admin/img/coin01.png" /><img class="icon2"
+							src="__STATIC__/admin/img/coin02.png" /> 公共管理<img class="icon3"
+							src="__STATIC__/admin/img/coin19.png" /><img class="icon4"
+							src="__STATIC__/admin/img/coin20.png" />
+					</dt>
+					<dd>
+						<img class="coin11" src="__STATIC__/admin/img/coin111.png" /><img class="coin22"
+							src="__STATIC__/admin/img/coin222.png" /><a class="cks" href="{:url('admin/notice/index')}"
+							>公告管理</a><img class="icon5" src="__STATIC__/admin/img/coin21.png" />
+					</dd>
+					<dd>
+						<img class="coin11" src="__STATIC__/admin/img/coin111.png" /><img class="coin22"
+							src="__STATIC__/admin/img/coin222.png" /><a class="cks" href="p2.html"
+							>反馈管理</a><img class="icon5" src="__STATIC__/admin/img/coin21.png" />
+					</dd>
+				</dl>
+				<dl class="system_log">
+					<dt>
+						<img class="icon1" src="__STATIC__/admin/img/coin07.png" /><img class="icon2"
+							src="__STATIC__/admin/img/coin08.png" /> 读者管理<img class="icon3"
+							src="__STATIC__/admin/img/coin19.png" /><img class="icon4"
+							src="__STATIC__/admin/img/coin20.png" />
+					</dt>
+					<dd>
+						<img class="coin11" src="__STATIC__/admin/img/coin111.png" /><img class="coin22"
+							src="__STATIC__/admin/img/coin222.png" /><a href="{:url('admin/user/info')}" 
+							class="cks">读者管理</a><img class="icon5" src="__STATIC__/admin/img/coin21.png" />
+					</dd>
+				</dl>
+				<dl class="system_log">
+					<dt>
+						<img class="icon1" src="__STATIC__/admin/img/coin14.png" /><img class="icon2"
+							src="__STATIC__/admin/img/coin13.png" /> 心愿管理<img class="icon3"
+							src="__STATIC__/admin/img/coin19.png" /><img class="icon4"
+							src="__STATIC__/admin/img/coin20.png" />
+					</dt>
+					<dd>
+						<img class="coin11" src="__STATIC__/admin/img/coin111.png" /><img class="coin22"
+							src="__STATIC__/admin/img/coin222.png" /><a class="cks">心愿管理</a><img class="icon5" src="__STATIC__/admin/img/coin21.png" />
+					</dd>
+				</dl>
+				<dl class="system_log">
+					<dt>
+						<img class="icon1" src="__STATIC__/admin/img/coin10.png" /><img class="icon2"
+							src="__STATIC__/admin/img/coin09.png" /> 其他管理<img class="icon3"
+							src="__STATIC__/admin/img/coin19.png" /><img class="icon4"
+							src="__STATIC__/admin/img/coin20.png" />
+					</dt>
+					<dd>
+						<img class="coin11" src="__STATIC__/admin/img/coin111.png" /><img class="coin22"
+							src="__STATIC__/admin/img/coin222.png" /><a class="cks">超级管理</a><img class="icon5"
+							src="__STATIC__/admin/img/coin21.png" />
+					</dd>
+				</dl>
+				<dl class="system_log">
+					<dt>
+						<img class="icon1" src="__STATIC__/admin/img/coinL1.png" /><img class="icon2"
+							src="__STATIC__/admin/img/coinL2.png" /> 系统管理<img class="icon3"
+							src="__STATIC__/admin/img/coin19.png" /><img class="icon4"
+							src="__STATIC__/admin/img/coin20.png" />
+					</dt>
+					<dd>
+						<img class="coin11" src="__STATIC__/admin/img/coin111.png" /><img class="coin22"
+							src="__STATIC__/admin/img/coin222.png" /><a href="changepwd.html"
+							 class="cks">修改密码</a><img class="icon5"
+							src="__STATIC__/admin/img/coin21.png" />
+					</dd>
+					<dd>
+						<img class="coin11" src="__STATIC__/admin/img/coin111.png" /><img class="coin22"
+							src="__STATIC__/admin/img/coin222.png" /><a class="cks">退出</a><img
+							class="icon5" src="__STATIC__/admin/img/coin21.png" />
+					</dd>
+				</dl>
+			</div>
+		</div>
+		{/block}
+		<div class="contain">
+			<h1>图书管理系统</h1>
+			{block name="body"}{/block}
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,292 @@
+{extend name="extra@admin/main" /}
+{block name="style"}
+<link href="__STATIC__/admin/css/haiersoft.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/admin/css/bootstrap.css"/>
+<style type="text/css">
+body{
+			margin: 0;
+			padding: 0;
+		}
+		.contain{
+			margin: 0;
+			padding: 0;
+			/*background-image: url(__STATIC__/admin/img/logBanner.png);*/
+			background-position: center;
+			background-size: 100% 700px;
+			height: 600px;
+			margin-left: 220px;
+		}
+		dl{
+			margin-bottom: 0;
+		}
+		/*.contain h1{
+			    font-size: 54px;
+			    color: #000000;
+			    position: absolute;
+			    text-align: center;
+			    top: 200px;
+			    left: 33%;
+		}*/
+	.modal-body{
+				margin-left: 20px;
+			}
+			.label_left{
+				    float: left;
+				    width: 160px;
+				    padding-top: 5px;
+				    text-align: right;
+				    font-size: 17px;
+			}
+			.label_right{
+				width: 200px;
+			    margin-left: 15px;
+			    margin-top: 4px;
+				float: left;
+			}
+			.modal-footer{
+				clear: both;
+			}
+			.box{
+				width: 100%;
+				height:50px;
+			}
+			.add{
+				float: right;
+			    margin-right: 58px;
+    			margin-top: 4px;
+			}
+			select{
+				width: 161px;
+			}
+</style>
+{/block}
+{block name="body"}
+	<div id="MainForm">
+		<div class="form_boxA">
+			<h2>年度预算列表</h2>
+			<table cellpadding="0" cellspacing="0">
+				
+				<tr>
+					<th>图书ID</th>
+					<th>书名</th>
+					<th>出版社</th>
+					<th>作者</th>
+					<th>类型</th>
+					<th>是否借出</th>
+					<th>借阅次数</th>
+					<th>定价</th>
+					<th>操作</th>
+				</tr>
+				{if condition="!empty($list)"}
+				{foreach $list as $vo}
+				<tr>
+					<td>{$vo.id}</td>
+					<td>{$vo.title}</td>
+					<td>{$vo.press}</td>
+					<td>{$vo.author}</td>
+					<td>{$vo.type}</td>
+					<td>{$vo.lend}</td>
+					<td>{$vo.b_times}</td>
+					<td>{$vo.price}</td>
+					<td>
+						<a class="edit" data-toggle="modal" data-target="#myModal">编辑</a> |
+						<a class="dlt">删除</a>
+					</td>
+				</tr>
+				{/foreach}
+				{/if}
+			</table>
+			<button class="btn btn-primary add"  data-toggle="modal" data-target="#book_add">添加</button>
+			<p class="msg">共找到47条年度预算记录，当前显示从第1条至第10条</p>
+		</div>
+	</div>
+	<!-- /MainForm -->
+	<!--编辑-->
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						编辑
+					</h4>
+				</div>
+				<div class="modal-body">
+					<div class="box">
+						<div class="label_left">
+							书名:
+						</div>
+						<div class="label_right">
+							<input type="text" />
+						</div>
+					</div>
+					<div class="box">
+						<div class="label_left">
+							出版社:
+						</div>
+						<div class="label_right">
+							<input type="text"   />
+						</div>
+					</div>
+					<div class="box">
+						<div class="label_left">
+							作者:
+						</div>
+						<div class="label_right">
+							<input type="text"  />
+						</div>
+					</div>
+					<div class="box">
+						<div class="label_left">
+							类型:
+						</div>
+						<div class="label_right">
+							<select name=""> 
+								<option value="文学">文学</option>
+								<option value="小说">小说</option>
+								<option value="儿童">儿童</option>
+								<option value="语言">语言</option>
+								<option value="艺术">艺术</option>
+							</select>
+						</div>
+					</div>
+					<div class="box">
+						<div class="label_left">
+							是否借出:
+						</div>
+						<div class="label_right">
+							<input type="text"  />
+						</div>
+					</div>
+					<div class="box">
+						<div class="label_left">
+							借阅次数:
+						</div>
+						<div class="label_right">
+							<input type="text"   />
+						</div>
+					</div>
+					<div class="box">
+						<div class="label_left">
+							价格:
+						</div>
+						<div class="label_right">
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary sub">
+						确认
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 添加 -->
+	<div class="modal fade" id="book_add">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						添加
+					</h4>
+				</div>
+				<form action="{:url('admin/book/form')}" method="post" id="form1">
+					<div class="modal-body">
+						<div class="box">
+							<div class="label_left">
+								书名:
+							</div>
+							<div class="label_right">
+								<input name="title" type="text" />
+							</div>
+						</div>
+						<div class="box">
+							<div class="label_left">
+								出版社:
+							</div>
+							<div class="label_right">
+								<input name="press" type="text"   />
+							</div>
+						</div>
+						<div class="box">
+							<div class="label_left">
+								作者:
+							</div>
+							<div class="label_right">
+								<input name="author" type="text"  />
+							</div>
+						</div>
+						<div class="box">
+							<div class="label_left">
+								类型:
+							</div>
+							<div class="label_right">
+								<select name="type"> 
+									<option value="文学">文学</option>
+									<option value="小说">小说</option>
+									<option value="儿童">儿童</option>
+									<option value="语言">语言</option>
+									<option value="艺术">艺术</option>
+								</select>
+							</div>
+						</div>
+						<div class="box">
+							<div class="label_left">
+								是否借出:
+							</div>
+							<div class="label_right">
+								<input name="lend" type="text"  />
+							</div>
+						</div>
+						<div class="box">
+							<div class="label_left">
+								借阅次数:
+							</div>
+							<div class="label_right">
+								<input name="b_times" type="text"   />
+							</div>
+						</div>
+						<div class="box">
+							<div class="label_left">
+								价格:
+							</div>
+							<div class="label_right">
+								<input name="price" type="text" />
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary sub">
+							确认
+						</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="__STATIC__/admin/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__STATIC__/admin/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		window.onload = function () {
+
+			$(".dlt").click(function(){
+				$(this).parent().parent().remove();
+			})
+			
+		
+		}
+
+	</script>
+{/block}

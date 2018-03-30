@@ -1,0 +1,47 @@
+{extend name="extra@admin/main" /}
+{block name="body"}
+<div id="Popup">
+	<div id="SubPopup">
+		<div class="form_boxD">
+			<table cellpadding="0" cellspacing="0">
+				<tr class="ttl">
+					<th width="10">&nbsp;</th>
+					<th><strong>图书类别</strong></th>
+					<th><strong>描述</strong></th>
+				</tr>
+				<tr>
+					<th><input name="" type="radio" value=""></th>
+					<th>哲学</th>
+					<td>简单描述文字简单描述文字简单描述文字简单描述文字简单描述文字</td>
+				</tr>
+				<tr>
+					<th width="10"><input name="" type="radio" value=""></th>
+					<th>医学</th>
+					<td>简单描述文字简单描述文字简单描述文字简单描述文字简单描述文字</td>
+				</tr>
+				<tr>
+					<th><input name="" type="radio" value=""></th>
+					<th>计算机</th>
+					<td>简单描述文字简单描述文字简单描述文字简单描述文字简单描述文字</td>
+				</tr>
+				<tr>
+					<th width="10"><input name="" type="radio" value=""></th>
+					<th>儿童漫画</th>
+					<td>简单描述文字简单描述文字简单描述文字简单描述文字简单描述文字</td>
+				</tr>
+				<tr>
+					<th><input name="" type="radio" value=""></th>
+					<th>心理学</th>
+					<td>简单描述文字简单描述文字简单描述文字简单描述文字简单描述文字</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!-- SubPopup -->
+
+	<div id="BtmBtn">
+		<div class="btn_box floatR mag_l20"><input name="" type="button" value="下一步" onmousemove="this.className='input_move'" onmouseout="this.className='input_out'"></div>
+		<div class="btn_boxB floatR"><input name="" type="button" value="取消" onmousemove="this.className='input_move'" onmouseout="this.className='input_out'"></div>
+	</div>
+</div>
+{/block}

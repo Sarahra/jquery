@@ -1,0 +1,25 @@
+<?php
+// +----------------------------------------------------------------------
+// | ThinkPHP [ WE CAN DO IT JUST THINK ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2018 http://thinkphp.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Date 03-26
+// +----------------------------------------------------------------------
+// | Author: fushengfu <shengfu8161980541@qq.com>
+// +----------------------------------------------------------------------
+namespace controller;
+
+use think\Controller;
+
+class basicAdmin extends Controller
+{
+    private function __construct()
+    {
+    	parent::__construct();
+    	$this->_checkLogin();
+    	$this->_checkMenu();
+    }
+}
